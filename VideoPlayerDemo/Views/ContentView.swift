@@ -19,7 +19,9 @@ struct ContentView: View {
                     ForEach(Query.allCases, id: \.self) { query in
                         QueryTag(query: query, isSelected: videoPlayerViewModel.selectedQuery == query)
                             .onTapGesture {
-                                videoPlayerViewModel.selectedQuery = query
+                                if query != videoPlayerViewModel.selectedQuery {
+                                    videoPlayerViewModel.selectedQuery = query
+                                }
                             }
                     }
                 }
@@ -27,6 +29,7 @@ struct ContentView: View {
                 ScrollView {
                     if videoPlayerViewModel.isLoading {
                         ProgressView()
+                            .tint(.gray)
                     } else {
                         LazyVGrid(columns: columns, spacing: 20) {
                             ForEach(videoPlayerViewModel.videos, id: \.id) { video in
