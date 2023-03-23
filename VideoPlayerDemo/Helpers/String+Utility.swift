@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+extension String {
+    var asUrl: URL? {
+        URL(string: self)
+    }
+}
